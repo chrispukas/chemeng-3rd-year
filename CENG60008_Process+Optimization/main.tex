@@ -1,0 +1,135 @@
+\documentclass{article}
+\usepackage[a4paper, total={6in, 8in}]{geometry}
+\usepackage{amssymb, amsmath, parskip}
+ % Required for inserting images
+
+\title{CENG60008: Process Optimization}
+
+\begin{document}
+
+\maketitle
+
+\section{Topic 1. Introduction to Optimization}
+
+\subsection{Modelling}
+
+\textbf{Optimization model (mathematical program):} A mathematical model that seeks values for decision variables \(x\) that minimize (or maximize) an objective function \(f(x)\), subject to constraints \(g(x) \le 0\). An optimization model is usually set up as follows:
+
+\begin{align*}
+\min_{x \in \mathbb{R}^{n_x}} \quad & f(x) \\
+\text{s.t.} \quad & h(x) = 0 \\
+& g(x) \leq 0 \\
+& x^L \leq x \leq x^U
+\end{align*}
+
+s.t. indicates the constraints that the model is subject to, there are 2 types of constraints:
+
+\begin{enumerate}
+    \item Variable-type constraints: \(x_1, x_2 \geq 0\)
+    \item Main constraints: \(0.5x_1 + 0.2x_2 \geq 0\)
+\end{enumerate}
+
+Key components of an optimization model:
+\begin{enumerate}
+    \item \textbf{Decision Variables}: the variables that an optimizer proposes to search for optima.
+    \item \textbf{Constraints}: pre-defined restrictions that influence the location of optima.
+    \item \textbf{Objective/Criterion functions}: the function(s) to optimize, these define the location of optima (minima/maxima) within a given domain, these can define costs, expenses, time-to-completion etc.
+\end{enumerate}
+
+\textbf{Feasible Solutions}: solutions that satisfy all defined constraints.
+\textbf{Optimal Solutions}: a subset of feasible solutions, that also achieve objective function values as good, or better than any other feasible solution.
+
+\textbf{System Boundaries}: the line between values that are taken as settled, and values that are to be decided is called the system boundary. The mathematical program lies within the system boundary, which relies on the modeling and analysis of decision variables, subject to parameters (constraints, objective functions). Both the parameters, and decision variables together determine the results measured as output variables.
+
+\textbf{Subcategories of models}: in general, models, and model tractability relies on two main types of models:
+\begin{enumerate}
+    \item \textbf{Descriptive models}: models that evaluate fixed decisions via brute-force approaches rather through good choices (e.g. simulations, and numerical searches) (more valid, less tractable)
+    \item \textbf{Prescriptive models}: decisions are informed by analytic inferences. (less valid, more tractable - mathematically informed)
+\end{enumerate}
+
+Therefore, by construction descriptive models produce fewer inferences than prescriptive models.
+
+\textbf{Further subcategories of models}: models can be further separated into:
+\begin{enumerate}
+    \item \textbf{Deterministic}: involve fixed outcomes, with usually more mathematically tractable results (more analytical tools are available for result analysis).
+    \item \textbf{Stochastic}: involves uncertainty at inference via methods like stochastic simulation (Monte Carlo analysis) to estimate the mechanics of the true system distribution when \(n\) is large enough
+\end{enumerate}
+
+As a result, it can be seen that deterministic models may be an approximation when a system has stochastic variance, with higher tractability than stochastic methods.
+
+\subsection{Local and Global Optimality}
+
+The feasible set \(S\) is the collection of choices for decision variables that satisfy all of the constraints:
+\begin{align*}
+S := \left\{ x \in \mathbb{R}^{n_x} : g \left(x\right) \leq 0, h\left(x\right) = 0, x^L \leq x \leq x^U\right\}
+\end{align*}
+
+\(S\) is plotted by introducing constraints one-by-one, keeping track of the region satisfying all at the same time.
+
+A \textbf{global minimum} \(x^*\) is a feasible choice for the decision variables, with an objective function at least as good as any other feasible point:
+\begin{align*}
+    f\left(x^*\right) \leq f\left(x\right), \forall x \in S
+\end{align*}
+
+The optimization problem may have unique minima, multiple minima, or no minima at all, with an optimum solution being found at the optimum objective value \(f^*\).
+
+When defining local optimality, we must check how the local region changes around the proposed optimal vector. A proof of this is as follows:
+\begin{align*}
+\exists \delta > 0 \quad \text{such that} \quad f(\underline{\textbf{x}}^*) \leq f(\underline{\textbf{x}}), \quad \forall \underline{\textbf{x}} \in S \quad \text{with} \quad \left\| \underline{\textbf{x}} - \underline{\textbf{x}}^* \right\| < \delta
+\end{align*}
+
+This implicitly constructs a local hyper-sphere of candidate points centered at the local optima, with a radius of \(\delta\) (finite quantity). The strong inequality \(>\) or \(<\) indicates strict (isolated) local optima, conversely \(\geq\), or \(\leq\) indicates weak local optima.
+
+
+\textbf{Heuristic/Approximate Optimum}: a feasible solution derived from prescriptive analysis that is not guaranteed to yield an exact optimum.
+
+\subsection{Tractability, and Feasibility}
+\textbf{Tractability}: defined as the degree to which the model admits conventional analysis (how feasible analysis is using standard mathematical methods).
+
+The feasible set \(S\) can be deemed infeasible due to the following reasons:
+\begin{enumerate}
+    \item The feasible set is empty: \(S = \emptyset\) (constraints violate all throughout)
+    \item Set bounds are improperly defined with unconstrained sets, it is computationally intractable for the global minima to be identified within infinite bounds.
+\end{enumerate}
+
+\subsection{Graphing models}
+
+When plotting, take into account the following information: 
+
+\begin{enumerate}
+    \item \textbf{Contour lines}: draw dotted contour lines of the specified objective function \(f\left(\underline{\textbf{x}}\right)\) to indicate the level at a given input vector \(\underline{\textbf{x}}^*\).
+    \item \textbf{Constraint boundaries}: these define the region of feasibility, showing where optimisation candidates are allowed to be proposed. When drawing constraint boundaries, constraints can be described as either \textbf{active}, meaning that the specific boundary limit directly influences the optima, and \textbf{inactive}, meaning the opposite.
+    \item \textbf{Optimum solution vector}: show the exact location of the optimum solution vector \(\underline{\textbf{x}}^*\), found within the feasible region.
+\end{enumerate}
+
+
+
+\subsection{Convexity and global optimality}
+
+A function \(f: \mathbb{R}^n \xrightarrow{} \mathbb{R}\) is said to be:
+\begin{enumerate}
+    \item \textbf{Convex on \(S\)} if the line segment connecting \(f\left(\underline{\textbf{x}}_1\right)\) and \(f\left(\underline{\textbf{x}}_2\right)\) at any two points \(\underline{\textbf{x}}_1 \ne \underline{\textbf{x}}_2\) lies above the function between \(\underline{\textbf{x}}_1\) and \(\underline{\textbf{x}}_2\),
+    \(f\left( \gamma \underline{\textbf{x}}_1 + \left( 1 - \gamma\right) \underline{\textbf{x}}_2\right) \leq \gamma f\left(\underline{\textbf{x}}_1\right) +\left(1-\gamma\right)f\left(\underline{\textbf{x}}_2\right)\), \(\forall \gamma \in \left[ 0, 1\right]\)
+    \item \textbf{Strictly convex on \(S\)} if:
+    \(f\left( \gamma \underline{\textbf{x}}_1 + \left( 1 - \gamma\right) \underline{\textbf{x}}_2\right) < \gamma f\left(\underline{\textbf{x}}_1\right) +\left(1-\gamma\right)f\left(\underline{\textbf{x}}_2\right)\), \(\forall \gamma \in \left[ 0, 1\right]\)
+\end{enumerate}
+
+A symmetric matrix is said to be:
+\begin{enumerate}
+    \item \textbf{Positive definite} \(A\): if all of its eigenvalues are positive.
+    \item \textbf{Positive semi-definite}: if all of its eigenvalues are non-negative.
+\end{enumerate}
+
+Convexity is detected via the hessian test
+
+
+
+
+\subsection{Linear and Nonlinear Programs}
+
+A function is linear if it is a constant-weighted sum of decision variables, otherwise it is nonlinear. \(f\left(x\right) = \sum_i w_ix_i \) (contains only powers of 1)
+
+
+
+
+\end{document}

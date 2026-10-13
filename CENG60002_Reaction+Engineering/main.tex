@@ -1,0 +1,55 @@
+\documentclass{article}
+\usepackage[a4paper, total={6in, 8in}]{geometry}
+\usepackage{amssymb, amsmath, parskip}
+ % Required for inserting images
+
+\title{CENG60002: Reaction Engineering II}
+\begin{document}
+\maketitle
+\section{Topic 0. Conditions for Phase Stability, and Reaction Equilibrium}
+
+Chemical reactors are not at equilibrium, as the net rates of reactions are usually not allowed to become zero. Considering a single-phase multicomponent system, if we declare the following variables: \(T\), temperature, \(P\), pressure, and \(n_i\) the number of moles of each component \(i\). The Gibbs energy of the system G utilizes these state variables to declare the conditions for equilibrium, 
+\begin{align*}
+    dG = -SdT + VdP + \sum_{j} \mu_j dn_j
+\end{align*}
+where \(S\) is the entropy, \(V\) is the volume; both of the system, and \(\mu\) is the chemical potential of component \(j\).
+
+
+
+\section{Topic 1. External Mass Transfer}
+
+The analysis of external mass transfer will be done on a catalyst surface. We define the following variables: \(C_{A,s}\), the concentration of reactant A in the catalyst, \(C_{A,ss}\): the concentration of reactant A at the surface of the catalyst \(z=0\), and finally \(C_A\): the concentration of A in the bulk liquid. 
+
+We can define the following rates:
+\begin{enumerate}
+    \item \textbf{Mass Transfer}: \(r_{A,mass} = k_{m_c}\left(C_A - C_A^{surf}\right)\), where \(k_{m_c} = \frac{D_{AB}}{\delta}\) (derived from Fick's law of diffusion), this assumes a linear diffusion profile along the laminar film across the surface of the catalyst.
+    \item \textbf{Reaction Rate}: \(r_{A,kinetics} = k_{surf} C_A^{surf}\); simple rate of reaction, where \(k_{surf} = k_0 \exp^{\left(-\frac{E_a}{RT}\right)}\)
+\end{enumerate}
+
+At equilibrium:
+\begin{align*}
+r_{A,\text{mass}} &= r_{A,\text{kinetics}} \\
+k_{m_c}\left(C_A - C_A^{\text{surf}}\right) &= k_{\text{surf}} C_A^{\text{surf}} \\
+C_{A}^{surf} &= \left(\frac{k_{m,c}}{k_{m,c} + k_{surf}}\right) C_A
+\end{align*}
+
+Finally, we define the overall rate constant \(k_0\) as
+\begin{align*}
+\frac{1}{k_0} &= \frac{1}{k_{m_c}} + \frac{1}{k_{surf}}
+\end{align*}
+
+Due to this construction, we can observe the following limiting cases:
+\begin{enumerate}
+    \item \text{Rapid Mass Transfer}: \(k_{m_c} >> k_s\), resulting in \(k_0 \approx k_s\), and \(C_{A,surf} \approx C_A\), which is therefore rate-controlled.
+    \item \text{Rapid Reaction}: \(k_{s} >> k_{m_c}\), resulting in \(k_0 \approx k_{m_c}\), and \(C_{A,surf} \approx 0\), which is therefore diffusion-controlled.
+\end{enumerate}
+
+There are also several important dimensionless numbers:
+\begin{enumerate}
+    \item \textbf{Fick's Law Corrections}: \(\delta_A = \frac{\left(r + s + ...\right) - \left(a + b + ...\right)}{a}\).
+    \item \textbf{Reynolds Number}: \(Re = \frac{G d_p}{\mu} = \frac{inertial\;effects}{viscous\;effects}\).
+    \item \textbf{Prandlt Number}: \(Re = \frac{C_p \mu}{\lambda} = \frac{viscous\;effects}{heat\;transfer\;effects}\).
+    \item \textbf{Schmidt Number}: \(Sc = \frac{\mu}{\rho_f D} = \frac{viscous\;effects}{diffusion\;effects}\).
+\end{enumerate}
+
+\end{document}
