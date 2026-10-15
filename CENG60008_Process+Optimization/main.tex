@@ -114,16 +114,16 @@ A function \(f: \mathbb{R}^n \xrightarrow{} \mathbb{R}\) is said to be:
     \(f\left( \gamma \underline{\textbf{x}}_1 + \left( 1 - \gamma\right) \underline{\textbf{x}}_2\right) < \gamma f\left(\underline{\textbf{x}}_1\right) +\left(1-\gamma\right)f\left(\underline{\textbf{x}}_2\right)\), \(\forall \gamma \in \left[ 0, 1\right]\)
 \end{enumerate}
 
-A symmetric matrix is said to be:
+A symmetric matrix is said to be
 \begin{enumerate}
-    \item \textbf{Positive definite} \(A\): if all of its eigenvalues are positive.
-    \item \textbf{Positive semi-definite}: if all of its eigenvalues are non-negative.
+    \item \textbf{Positive definite} \(\lambda_{1, 2} > 0\): if all of its eigenvalues are positive.
+    \item \textbf{Positive semi-definite} \(\lambda_{1, 2} \geq 0\): if all of its eigenvalues are non-negative.
+    \item \textbf{Otherwise, indefinite} \(\lambda_{1, 2} < 0\), or \(\lambda_1 > 0\), and \(\lambda_2 < 0\) (saddle point).
 \end{enumerate}
+where \(\lambda_{1,2}\) are the first and second eigenvalues from the eigenvalue decomposition of the hessian.
 
-Convexity is detected via the hessian test
-
-
-
+In situations where the function \(f\) is composed of a linear sum of \(n\) univariate functions (functions that only depend on 1 variable), then the convexity depends on the individual convexities of each univariate e.g. \(f\left(x_1, x_2\right) = \frac{10}{\sqrt{x_1}} - \log \left(x_2\right) \forall x_1, x_2 > 0\).
+Given that \(\frac{1}{\sqrt{x}}\) is convex (as 2nd oder derivative is positive), and \(\log \left(z\right)\) is convex (also since its 2nd order derivative is positive), then the sum of two convex functions leads to a convex function.
 
 \subsection{Linear and Nonlinear Programs}
 
