@@ -130,11 +130,18 @@ Given that \(\frac{1}{\sqrt{x}}\) is convex (as 2nd oder derivative is positive)
 
 \subsection{Linear Programs}
 
-An optimization model is considered a \textbf{linear program} if it has continuous variables, a single linear objective function \(f\left(x\right) = \underline{\textbf{w}}^T \cdot \underline{\textbf{x}} \) (weighted sums of each decision variable \(x_i\)), and linear equality/inequality constraints e.g. \(\underline{\textbf{w}}^T \cdot \underline{\textbf{x}} \leq b\). There are several general types of LP models:
+An optimization model is considered a \textbf{linear program} if it has continuous variables, a single linear objective function \(f\left(x\right) = \underline{\textbf{w}}^T \cdot \underline{\textbf{x}} \) (weighted sums of each decision variable \(x_i\)), and linear equality/inequality constraints e.g. \(\underline{\textbf{w}}^T \cdot \underline{\textbf{x}} \leq b\). LPs have several fundamental properties:
 \begin{enumerate}
-    \item \textbf{Allocation models}: Involves the splitting/allocation of a decision variable bounded by n finite equality constraints, denoted as \(g_i\left(x\right)\) (e.g. the target number of barrels of oil to be produced).
-    \item \textbf{Blending models}: Involes the merging \(n\) decision variables to best fulfil the target constraints (e.g. fuel blends for optimum production from \(n\) refineries, or scrap blending to manufacture high-grade steel).
-    \item \textbf{Operation planning models}: Involves optimizing decisions for optimum production of \(n\) products.
+    \item \textbf{Global optimality is guaranteed}: every local optimum is also a global optimum.
+    \item \textbf{Optimal solutions and extreme points}: unique optimal solutions are always found at extreme points, wheras if an LP has multiple optimum solutions, at least one will occur at the \textbf{extreme point} (defined in the domain \(\mathbb{R}^{n_x}\), where at least \(n\) independent constraints are only active at that point, or more simply at the verticies of the constraint envelope bounding the interior of the LP feasible region).
+    \item \textbf{Non-constant objective functions}: if an LP has a non-constant objective function (meaning that \(f\left(x\right) \neq c\)), then the optimal point will lie outside of the interior of the constraint envelope (\(f\left(x\right)\) is an n-dimensional hyperplane with unconstrained global optima at \(\infty\) if maximizing, and \(-\infty\) if minimizing). 
+\end{enumerate}
+
+There are several general types of LP models:
+\begin{enumerate}
+    \item \textbf{Allocation models}: involves the splitting/allocation of a decision variable bounded by n finite equality constraints, denoted as \(g_i\left(x\right)\) (e.g. the target number of barrels of oil to be produced).
+    \item \textbf{Blending models}: involves the merging \(n\) decision variables to best fulfil the target constraints (e.g. fuel blends for optimum production from \(n\) refineries, or scrap blending to manufacture high-grade steel).
+    \item \textbf{Operation planning models}: involves optimizing decisions for optimum production of \(n\) products.
 \end{enumerate}
 
 Furthermore, the types of decision variables, and constraints are as follows:
@@ -146,8 +153,18 @@ Furthermore, the types of decision variables, and constraints are as follows:
 
 Sometimes, programming models be time-phased, where time becomes an index dimension on both constraints, and decision variables. A \textbf{time horizon} establishes the range of valid time indicies \(t\) to be modelled, these can be either \textbf{finite} (fixed) or \textbf{infinite} (where the final period is wrapped around to the first).
 
-
 Non-linear programming models can be linearized, resulting in both mathematically, and computationally tractable models where local optima also describe global optima.
+
+\subsection{Linearizing non-linear objectives}
+
+There are two main strategies for linearizing non-linear programs:
+\begin{enumerate}
+    \item \textbf{Minimax}: minimizing the maximum, by introducing an intermediate variable \(f\) (acts as a new dim), we can then reformulate \(f = f\left(x\right)\) to be \(f \leq f\left(x\right)\) for \(\max \left\{ f \right\}\): maximization, and \(f \geq f\left(x\right)\) for \(\min \left\{ f \right\}\): minimization.
+    \item \textbf{Maximin}: maximizing the minimum (vice versa).
+\end{enumerate}
+
+These 'squeeze' the intermediate variable \(f\) to become linear, trading off computational tractability (more difficult to compute).
+
 
 \subsection{Sensitivity Analysis}
 
