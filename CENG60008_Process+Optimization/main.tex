@@ -125,10 +125,42 @@ where \(\lambda_{1,2}\) are the first and second eigenvalues from the eigenvalue
 In situations where the function \(f\) is composed of a linear sum of \(n\) univariate functions (functions that only depend on 1 variable), then the convexity depends on the individual convexities of each univariate e.g. \(f\left(x_1, x_2\right) = \frac{10}{\sqrt{x_1}} - \log \left(x_2\right) \forall x_1, x_2 > 0\).
 Given that \(\frac{1}{\sqrt{x}}\) is convex (as 2nd oder derivative is positive), and \(\log \left(z\right)\) is convex (also since its 2nd order derivative is positive), then the sum of two convex functions leads to a convex function.
 
-\subsection{Linear and Nonlinear Programs}
 
-A function is linear if it is a constant-weighted sum of decision variables, otherwise it is nonlinear. \(f\left(x\right) = \sum_i w_ix_i \) (contains only powers of 1)
+\section{Linear Programming}
 
+\subsection{Linear Programs}
+
+An optimization model is considered a \textbf{linear program} if it has continuous variables, a single linear objective function \(f\left(x\right) = \underline{\textbf{w}}^T \cdot \underline{\textbf{x}} \) (weighted sums of each decision variable \(x_i\)), and linear equality/inequality constraints e.g. \(\underline{\textbf{w}}^T \cdot \underline{\textbf{x}} \leq b\). There are several general types of LP models:
+\begin{enumerate}
+    \item \textbf{Allocation models}: Involves the splitting/allocation of a decision variable bounded by n finite equality constraints, denoted as \(g_i\left(x\right)\) (e.g. the target number of barrels of oil to be produced).
+    \item \textbf{Blending models}: Involes the merging \(n\) decision variables to best fulfil the target constraints (e.g. fuel blends for optimum production from \(n\) refineries, or scrap blending to manufacture high-grade steel).
+    \item \textbf{Operation planning models}: Involves optimizing decisions for optimum production of \(n\) products.
+\end{enumerate}
+
+Furthermore, the types of decision variables, and constraints are as follows:
+\begin{enumerate}
+    \item \textbf{Principal decision variables}: denotes the target values for which optima are to be found (principal allocation variables in allocation models, and principal blending variables in blending).
+    \item \textbf{Non-negativity, and bound restrictions}: ensures the correct operating domain for a given decision variable, usually non-negativity constraints \(x_i \geq 0\).
+    \item \textbf{Composition constraints}: constraints that sum over the composition \(n\) decision variables, enforcing upper and/or lower limits on the properties of the resulting blend.
+\end{enumerate}
+
+Sometimes, programming models be time-phased, where time becomes an index dimension on both constraints, and decision variables. A \textbf{time horizon} establishes the range of valid time indicies \(t\) to be modelled, these can be either \textbf{finite} (fixed) or \textbf{infinite} (where the final period is wrapped around to the first).
+
+
+Non-linear programming models can be linearized, resulting in both mathematically, and computationally tractable models where local optima also describe global optima.
+
+\subsection{Sensitivity Analysis}
+
+\textbf{Key Notation:}
+\begin{enumerate}
+    \item \textbf{Marginal price}: The rate of change of optimal solution \(z_*\) for an elementary variation in the RHS of \(b_i\) of a main constraint \(\sum_{j=1}^{n} a_{i,j} x_j \leq b_i\).
+\end{enumerate}
+
+Perturbations on the \(i^{th}\) constraint affects the feasible regions for a linear programming model in the following ways:
+\begin{enumerate}
+    \item \textbf{Relaxing}: relaxing the constraints either keeps, or improves the optimal value.
+    \item \textbf{Tightening}: relaxing the constraints either keeps, or worsens the optimal value.
+\end{enumerate}
 
 
 
