@@ -108,9 +108,9 @@ When plotting, take into account the following information:
 
 A function \(f: \mathbb{R}^n \xrightarrow{} \mathbb{R}\) is said to be:
 \begin{enumerate}
-    \item \textbf{Convex on \(S\)} if the line segment connecting \(f\left(\underline{\textbf{x}}_1\right)\) and \(f\left(\underline{\textbf{x}}_2\right)\) at any two points \(\underline{\textbf{x}}_1 \ne \underline{\textbf{x}}_2\) lies above the function between \(\underline{\textbf{x}}_1\) and \(\underline{\textbf{x}}_2\),
+    \item \textbf{Convex on \(S\) if}: the chord connecting \(f\left(\underline{\textbf{x}}_1\right)\) and \(f\left(\underline{\textbf{x}}_2\right)\) at any two points \(\underline{\textbf{x}}_1 \ne \underline{\textbf{x}}_2\) lies above the function between \(\underline{\textbf{x}}_1\) and \(\underline{\textbf{x}}_2\),
     \(f\left( \gamma \underline{\textbf{x}}_1 + \left( 1 - \gamma\right) \underline{\textbf{x}}_2\right) \leq \gamma f\left(\underline{\textbf{x}}_1\right) +\left(1-\gamma\right)f\left(\underline{\textbf{x}}_2\right)\), \(\forall \gamma \in \left[ 0, 1\right]\)
-    \item \textbf{Strictly convex on \(S\)} if:
+    \item \textbf{Strictly convex on \(S\) if}:
     \(f\left( \gamma \underline{\textbf{x}}_1 + \left( 1 - \gamma\right) \underline{\textbf{x}}_2\right) < \gamma f\left(\underline{\textbf{x}}_1\right) +\left(1-\gamma\right)f\left(\underline{\textbf{x}}_2\right)\), \(\forall \gamma \in \left[ 0, 1\right]\)
 \end{enumerate}
 
@@ -123,7 +123,7 @@ A symmetric matrix is said to be
 where \(\lambda_{1,2}\) are the first and second eigenvalues from the eigenvalue decomposition of the hessian.
 
 In situations where the function \(f\) is composed of a linear sum of \(n\) univariate functions (functions that only depend on 1 variable), then the convexity depends on the individual convexities of each univariate e.g. \(f\left(x_1, x_2\right) = \frac{10}{\sqrt{x_1}} - \log \left(x_2\right) \forall x_1, x_2 > 0\).
-Given that \(\frac{1}{\sqrt{x}}\) is convex (as 2nd oder derivative is positive), and \(\log \left(z\right)\) is convex (also since its 2nd order derivative is positive), then the sum of two convex functions leads to a convex function.
+Given that \(\frac{1}{\sqrt{x}}\) is convex (as 2nd oder derivative is positive), and \(\log \left(z\right)\) is concave (since its 2nd order derivative is negative), and \(\log\) is negated, becoming convex then the sum of two convex functions leads to a convex function.
 
 
 \section{Linear Programming}
@@ -133,8 +133,8 @@ Given that \(\frac{1}{\sqrt{x}}\) is convex (as 2nd oder derivative is positive)
 An optimization model is considered a \textbf{linear program} if it has continuous variables, a single linear objective function \(f\left(x\right) = \underline{\textbf{w}}^T \cdot \underline{\textbf{x}} \) (weighted sums of each decision variable \(x_i\)), and linear equality/inequality constraints e.g. \(\underline{\textbf{w}}^T \cdot \underline{\textbf{x}} \leq b\). LPs have several fundamental properties:
 \begin{enumerate}
     \item \textbf{Global optimality is guaranteed}: every local optimum is also a global optimum.
-    \item \textbf{Optimal solutions and extreme points}: unique optimal solutions are always found at extreme points, wheras if an LP has multiple optimum solutions, at least one will occur at the \textbf{extreme point} (defined in the domain \(\mathbb{R}^{n_x}\), where at least \(n\) independent constraints are only active at that point, or more simply at the verticies of the constraint envelope bounding the interior of the LP feasible region).
-    \item \textbf{Non-constant objective functions}: if an LP has a non-constant objective function (meaning that \(f\left(x\right) \neq c\)), then the optimal point will lie outside of the interior of the constraint envelope (\(f\left(x\right)\) is an n-dimensional hyperplane with unconstrained global optima at \(\infty\) if maximizing, and \(-\infty\) if minimizing). 
+    \item \textbf{Optimal solutions and extreme points}: unique optimal solutions are always found at extreme points, wheras if an LP has multiple optimum solutions, at least one will occur at the \textbf{extreme point} (defined in the domain \(\mathbb{R}^{n_x}\), where at least \(n\) independent constraints are only active at that point, or more simply at the vertices of the constraint envelope bounding the interior of the LP feasible region).
+    \item \textbf{Unboundedness and non-constant objective functions}: if an LP has a non-constant objective function (meaning that \(f\left(x\right) \neq c\)), then the optimal point will lie outside of the interior of the constraint envelope (assuming an unbounded LP, we can see \(f\left(x\right)\) as an n-dimensional hyperplane with unconstrained global optima at \(\infty\) if maximizing, and \(-\infty\) if minimizing). 
 \end{enumerate}
 
 There are several general types of LP models:
@@ -159,8 +159,8 @@ Non-linear programming models can be linearized, resulting in both mathematicall
 
 There are two main strategies for linearizing non-linear programs:
 \begin{enumerate}
-    \item \textbf{Minimax}: minimizing the maximum, by introducing an intermediate variable \(f\) (acts as a new dim), we can then reformulate \(f = f\left(x\right)\) to be \(f \leq f\left(x\right)\) for \(\max \left\{ f \right\}\): maximization, and \(f \geq f\left(x\right)\) for \(\min \left\{ f \right\}\): minimization.
-    \item \textbf{Maximin}: maximizing the minimum (vice versa).
+    \item \textbf{Minimax}: minimizing the maximum, by introducing an intermediate variable \(f\) (acts as a new dim), we can then reformulate \(f = f\left(x\right)\) to be \(\min_{f,x} \left\{ f \right\}\) s.t. \(f \geq f_i\left(x\right)\).
+    \item \textbf{Maximin}: maximizing the minimum (vice versa): reformulates \(f = f\left(x\right)\) to be \(\max_{f,x} \left\{ f \right\}\) s.t. \(f \leq f_i\left(x\right)\).
 \end{enumerate}
 
 These 'squeeze' the intermediate variable \(f\) to become linear, trading off computational tractability (more difficult to compute).
